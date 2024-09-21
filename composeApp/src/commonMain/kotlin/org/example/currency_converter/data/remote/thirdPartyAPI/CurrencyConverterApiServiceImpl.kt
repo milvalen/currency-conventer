@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 import org.example.currency_converter.domain.CurrencyConverterApiService
 import org.example.currency_converter.domain.SharedPrefsRepo
 import org.example.currency_converter.domain.model.ApiResponse
+import org.example.currency_converter.domain.model.CurrencyKey
 import org.example.currency_converter.domain.model.CurrencyObject
 import org.example.currency_converter.domain.model.RequestCondition
 
@@ -42,16 +43,20 @@ class CurrencyConverterApiServiceImpl(
         return try {
             val apiResponse = httpClient.get(API_ENDPOINT)
 
-            if (apiResponse.status.value == 200) {
+            if (apiResponse.status.value == 200)
                 Json.decodeFromString<ApiResponse>(apiResponse.body()).let {
                     prefs.storeLastUpdatedTime(it.meta.last_updated_at)
-                    RequestCondition.SuccessCondition(it.data.values.toList())
-                }
-            } else {
-                RequestCondition.ErrorCondition("HTTP Error: ${apiResponse.status}")
-            }
-        } catch (error: Exception) {
-            RequestCondition.ErrorCondition("${error.message}")
-        }
+
+                    RequestCondition.SuccessCondition(
+                        it.data.values.filter {
+                            currency -> it.data.keys.filter {
+                                key -> CurrencyKey.entries.map {
+                                    entry -> entry.name
+                                }.toSet().contains(key)
+                            }.contains(currency.code)
+                        }
+                    )
+            } else RequestCondition.ErrorCondition("HTTP Error: ${apiResponse.status}")
+        } catch (error: Exception) { RequestCondition.ErrorCondition("${error.message}") }
     }
 }

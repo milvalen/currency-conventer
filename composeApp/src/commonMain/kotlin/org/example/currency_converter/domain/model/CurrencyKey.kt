@@ -1,0 +1,306 @@
+package org.example.currency_converter.domain.model
+
+import org.jetbrains.compose.resources.DrawableResource
+
+import currencyconverter.composeapp.generated.resources.Res
+import currencyconverter.composeapp.generated.resources.flag_af
+import currencyconverter.composeapp.generated.resources.flag_al
+import currencyconverter.composeapp.generated.resources.flag_dz
+import currencyconverter.composeapp.generated.resources.flag_ao
+import currencyconverter.composeapp.generated.resources.flag_ar
+import currencyconverter.composeapp.generated.resources.flag_am
+import currencyconverter.composeapp.generated.resources.flag_aw
+import currencyconverter.composeapp.generated.resources.flag_au
+import currencyconverter.composeapp.generated.resources.flag_az
+import currencyconverter.composeapp.generated.resources.flag_bs
+import currencyconverter.composeapp.generated.resources.flag_bh
+import currencyconverter.composeapp.generated.resources.flag_bd
+import currencyconverter.composeapp.generated.resources.flag_bb
+import currencyconverter.composeapp.generated.resources.flag_by
+import currencyconverter.composeapp.generated.resources.flag_bz
+import currencyconverter.composeapp.generated.resources.flag_bj
+import currencyconverter.composeapp.generated.resources.flag_bt
+import currencyconverter.composeapp.generated.resources.flag_bo
+import currencyconverter.composeapp.generated.resources.flag_ba
+import currencyconverter.composeapp.generated.resources.flag_bw
+import currencyconverter.composeapp.generated.resources.flag_br
+import currencyconverter.composeapp.generated.resources.flag_bn
+import currencyconverter.composeapp.generated.resources.flag_bg
+import currencyconverter.composeapp.generated.resources.flag_bi
+import currencyconverter.composeapp.generated.resources.flag_kh
+import currencyconverter.composeapp.generated.resources.flag_cm
+import currencyconverter.composeapp.generated.resources.flag_ca
+import currencyconverter.composeapp.generated.resources.flag_cv
+import currencyconverter.composeapp.generated.resources.flag_ky
+import currencyconverter.composeapp.generated.resources.flag_cl
+import currencyconverter.composeapp.generated.resources.flag_cn
+import currencyconverter.composeapp.generated.resources.flag_co
+import currencyconverter.composeapp.generated.resources.flag_km
+import currencyconverter.composeapp.generated.resources.flag_cd
+import currencyconverter.composeapp.generated.resources.flag_cr
+import currencyconverter.composeapp.generated.resources.flag_hr
+import currencyconverter.composeapp.generated.resources.flag_cu
+import currencyconverter.composeapp.generated.resources.flag_cz
+import currencyconverter.composeapp.generated.resources.flag_dk
+import currencyconverter.composeapp.generated.resources.flag_dj
+import currencyconverter.composeapp.generated.resources.flag_do
+import currencyconverter.composeapp.generated.resources.flag_eg
+import currencyconverter.composeapp.generated.resources.flag_er
+import currencyconverter.composeapp.generated.resources.flag_et
+import currencyconverter.composeapp.generated.resources.flag_eu
+import currencyconverter.composeapp.generated.resources.flag_fj
+import currencyconverter.composeapp.generated.resources.flag_gm
+import currencyconverter.composeapp.generated.resources.flag_ge
+import currencyconverter.composeapp.generated.resources.flag_gh
+import currencyconverter.composeapp.generated.resources.flag_gt
+import currencyconverter.composeapp.generated.resources.flag_gn
+import currencyconverter.composeapp.generated.resources.flag_gy
+import currencyconverter.composeapp.generated.resources.flag_ht
+import currencyconverter.composeapp.generated.resources.flag_hn
+import currencyconverter.composeapp.generated.resources.flag_hk
+import currencyconverter.composeapp.generated.resources.flag_hu
+import currencyconverter.composeapp.generated.resources.flag_is
+import currencyconverter.composeapp.generated.resources.flag_in
+import currencyconverter.composeapp.generated.resources.flag_id
+import currencyconverter.composeapp.generated.resources.flag_ir
+import currencyconverter.composeapp.generated.resources.flag_iq
+import currencyconverter.composeapp.generated.resources.flag_il
+import currencyconverter.composeapp.generated.resources.flag_jm
+import currencyconverter.composeapp.generated.resources.flag_jp
+import currencyconverter.composeapp.generated.resources.flag_jo
+import currencyconverter.composeapp.generated.resources.flag_kz
+import currencyconverter.composeapp.generated.resources.flag_ke
+import currencyconverter.composeapp.generated.resources.flag_kp
+import currencyconverter.composeapp.generated.resources.flag_kr
+import currencyconverter.composeapp.generated.resources.flag_kw
+import currencyconverter.composeapp.generated.resources.flag_kg
+import currencyconverter.composeapp.generated.resources.flag_la
+import currencyconverter.composeapp.generated.resources.flag_lb
+import currencyconverter.composeapp.generated.resources.flag_ls
+import currencyconverter.composeapp.generated.resources.flag_lr
+import currencyconverter.composeapp.generated.resources.flag_ly
+import currencyconverter.composeapp.generated.resources.flag_mo
+import currencyconverter.composeapp.generated.resources.flag_mk
+import currencyconverter.composeapp.generated.resources.flag_mg
+import currencyconverter.composeapp.generated.resources.flag_mw
+import currencyconverter.composeapp.generated.resources.flag_my
+import currencyconverter.composeapp.generated.resources.flag_mv
+import currencyconverter.composeapp.generated.resources.flag_mr
+import currencyconverter.composeapp.generated.resources.flag_mu
+import currencyconverter.composeapp.generated.resources.flag_mx
+import currencyconverter.composeapp.generated.resources.flag_md
+import currencyconverter.composeapp.generated.resources.flag_mn
+import currencyconverter.composeapp.generated.resources.flag_ma
+import currencyconverter.composeapp.generated.resources.flag_mz
+import currencyconverter.composeapp.generated.resources.flag_mm
+import currencyconverter.composeapp.generated.resources.flag_na
+import currencyconverter.composeapp.generated.resources.flag_np
+import currencyconverter.composeapp.generated.resources.flag_nz
+import currencyconverter.composeapp.generated.resources.flag_ni
+import currencyconverter.composeapp.generated.resources.flag_ng
+import currencyconverter.composeapp.generated.resources.flag_no
+import currencyconverter.composeapp.generated.resources.flag_om
+import currencyconverter.composeapp.generated.resources.flag_pk
+import currencyconverter.composeapp.generated.resources.flag_pa
+import currencyconverter.composeapp.generated.resources.flag_pg
+import currencyconverter.composeapp.generated.resources.flag_py
+import currencyconverter.composeapp.generated.resources.flag_pe
+import currencyconverter.composeapp.generated.resources.flag_ph
+import currencyconverter.composeapp.generated.resources.flag_pl
+import currencyconverter.composeapp.generated.resources.flag_qa
+import currencyconverter.composeapp.generated.resources.flag_ro
+import currencyconverter.composeapp.generated.resources.flag_ru
+import currencyconverter.composeapp.generated.resources.flag_rw
+import currencyconverter.composeapp.generated.resources.flag_sh
+import currencyconverter.composeapp.generated.resources.flag_ws
+import currencyconverter.composeapp.generated.resources.flag_sa
+import currencyconverter.composeapp.generated.resources.flag_rs
+import currencyconverter.composeapp.generated.resources.flag_sc
+import currencyconverter.composeapp.generated.resources.flag_sl
+import currencyconverter.composeapp.generated.resources.flag_sg
+import currencyconverter.composeapp.generated.resources.flag_sb
+import currencyconverter.composeapp.generated.resources.flag_so
+import currencyconverter.composeapp.generated.resources.flag_za
+import currencyconverter.composeapp.generated.resources.flag_ss
+import currencyconverter.composeapp.generated.resources.flag_lk
+import currencyconverter.composeapp.generated.resources.flag_sd
+import currencyconverter.composeapp.generated.resources.flag_sr
+import currencyconverter.composeapp.generated.resources.flag_sz
+import currencyconverter.composeapp.generated.resources.flag_se
+import currencyconverter.composeapp.generated.resources.flag_ch
+import currencyconverter.composeapp.generated.resources.flag_sy
+import currencyconverter.composeapp.generated.resources.flag_tw
+import currencyconverter.composeapp.generated.resources.flag_tj
+import currencyconverter.composeapp.generated.resources.flag_tz
+import currencyconverter.composeapp.generated.resources.flag_th
+import currencyconverter.composeapp.generated.resources.flag_to
+import currencyconverter.composeapp.generated.resources.flag_tt
+import currencyconverter.composeapp.generated.resources.flag_tn
+import currencyconverter.composeapp.generated.resources.flag_tr
+import currencyconverter.composeapp.generated.resources.flag_tm
+import currencyconverter.composeapp.generated.resources.flag_ug
+import currencyconverter.composeapp.generated.resources.flag_ua
+import currencyconverter.composeapp.generated.resources.flag_ae
+import currencyconverter.composeapp.generated.resources.flag_gb
+import currencyconverter.composeapp.generated.resources.flag_nl
+import currencyconverter.composeapp.generated.resources.flag_us
+import currencyconverter.composeapp.generated.resources.flag_uy
+import currencyconverter.composeapp.generated.resources.flag_uz
+import currencyconverter.composeapp.generated.resources.flag_vu
+import currencyconverter.composeapp.generated.resources.flag_ve
+import currencyconverter.composeapp.generated.resources.flag_vn
+import currencyconverter.composeapp.generated.resources.flag_ye
+import currencyconverter.composeapp.generated.resources.flag_zm
+import currencyconverter.composeapp.generated.resources.flag_zw
+
+enum class CurrencyKey(val countryName: String, val countryFlag: DrawableResource) {
+    AFN("Afghanistan", Res.drawable.flag_af),
+    ALL("Albania", Res.drawable.flag_al),
+    DZD("Algeria", Res.drawable.flag_dz),
+    AOA("Angola", Res.drawable.flag_ao),
+    ARS("Argentina", Res.drawable.flag_ar),
+    AMD("Armenia", Res.drawable.flag_am),
+    AWG("Aruba", Res.drawable.flag_aw),
+    AUD("Australia", Res.drawable.flag_au),
+    AZN("Azerbaijan", Res.drawable.flag_az),
+    BSD("Bahamas", Res.drawable.flag_bs),
+    BHD("Bahrain", Res.drawable.flag_bh),
+    BDT("Bangladesh", Res.drawable.flag_bd),
+    BBD("Barbados", Res.drawable.flag_bb),
+    BYN("Belarus", Res.drawable.flag_by),
+    BZD("Belize", Res.drawable.flag_bz),
+    XOF("Benin", Res.drawable.flag_bj),
+    BTN("Bhutan", Res.drawable.flag_bt),
+    BOB("Bolivia", Res.drawable.flag_bo),
+    BAM("Bosnia and Herzegovina", Res.drawable.flag_ba),
+    BWP("Botswana", Res.drawable.flag_bw),
+    BRL("Brazil", Res.drawable.flag_br),
+    BND("Brunei", Res.drawable.flag_bn),
+    BGN("Bulgaria", Res.drawable.flag_bg),
+    BIF("Burundi", Res.drawable.flag_bi),
+    KHR("Cambodia", Res.drawable.flag_kh),
+    XAF("Cameroon", Res.drawable.flag_cm),
+    CAD("Canada", Res.drawable.flag_ca),
+    CVE("Cape Verde", Res.drawable.flag_cv),
+    KYD("Cayman Islands", Res.drawable.flag_ky),
+    CLP("Chile", Res.drawable.flag_cl),
+    CNY("China", Res.drawable.flag_cn),
+    COP("Colombia", Res.drawable.flag_co),
+    KMF("Comoros", Res.drawable.flag_km),
+    CDF("Congo", Res.drawable.flag_cd),
+    CRC("Costa Rica", Res.drawable.flag_cr),
+    HRK("Croatia", Res.drawable.flag_hr),
+    CUP("Cuba", Res.drawable.flag_cu),
+    CZK("Czech Republic", Res.drawable.flag_cz),
+    DKK("Denmark", Res.drawable.flag_dk),
+    DJF("Djibouti", Res.drawable.flag_dj),
+    DOP("Dominican Republic", Res.drawable.flag_do),
+    EGP("Egypt", Res.drawable.flag_eg),
+    ERN("Eritrea", Res.drawable.flag_er),
+    ETB("Ethiopia", Res.drawable.flag_et),
+    EUR("Eurozone", Res.drawable.flag_eu),
+    FJD("Fiji", Res.drawable.flag_fj),
+    GMD("Gambia", Res.drawable.flag_gm),
+    GEL("Georgia", Res.drawable.flag_ge),
+    GHS("Ghana", Res.drawable.flag_gh),
+    GTQ("Guatemala", Res.drawable.flag_gt),
+    GNF("Guinea", Res.drawable.flag_gn),
+    GYD("Guyana", Res.drawable.flag_gy),
+    HTG("Haiti", Res.drawable.flag_ht),
+    HNL("Honduras", Res.drawable.flag_hn),
+    HKD("Hong Kong", Res.drawable.flag_hk),
+    HUF("Hungary", Res.drawable.flag_hu),
+    ISK("Iceland", Res.drawable.flag_is),
+    INR("India", Res.drawable.flag_in),
+    IDR("Indonesia", Res.drawable.flag_id),
+    IRR("Iran", Res.drawable.flag_ir),
+    IQD("Iraq", Res.drawable.flag_iq),
+    ILS("Israel", Res.drawable.flag_il),
+    JMD("Jamaica", Res.drawable.flag_jm),
+    JPY("Japan", Res.drawable.flag_jp),
+    JOD("Jordan", Res.drawable.flag_jo),
+    KZT("Kazakhstan", Res.drawable.flag_kz),
+    KES("Kenya", Res.drawable.flag_ke),
+    KPW("North Korea", Res.drawable.flag_kp),
+    KRW("South Korea", Res.drawable.flag_kr),
+    KWD("Kuwait", Res.drawable.flag_kw),
+    KGS("Kyrgyzstan", Res.drawable.flag_kg),
+    LAK("Laos", Res.drawable.flag_la),
+    LBP("Lebanon", Res.drawable.flag_lb),
+    LSL("Lesotho", Res.drawable.flag_ls),
+    LRD("Liberia", Res.drawable.flag_lr),
+    LYD("Libya", Res.drawable.flag_ly),
+    MOP("Macau", Res.drawable.flag_mo),
+    MKD("North Macedonia", Res.drawable.flag_mk),
+    MGA("Madagascar", Res.drawable.flag_mg),
+    MWK("Malawi", Res.drawable.flag_mw),
+    MYR("Malaysia", Res.drawable.flag_my),
+    MVR("Maldives", Res.drawable.flag_mv),
+    MRU("Mauritania", Res.drawable.flag_mr),
+    MUR("Mauritius", Res.drawable.flag_mu),
+    MXN("Mexico", Res.drawable.flag_mx),
+    MDL("Moldova", Res.drawable.flag_md),
+    MNT("Mongolia", Res.drawable.flag_mn),
+    MAD("Morocco", Res.drawable.flag_ma),
+    MZN("Mozambique", Res.drawable.flag_mz),
+    MMK("Myanmar", Res.drawable.flag_mm),
+    NAD("Namibia", Res.drawable.flag_na),
+    NPR("Nepal", Res.drawable.flag_np),
+    ANG("Netherlands Antilles", Res.drawable.flag_nl),
+    NZD("New Zealand", Res.drawable.flag_nz),
+    NIO("Nicaragua", Res.drawable.flag_ni),
+    NGN("Nigeria", Res.drawable.flag_ng),
+    NOK("Norway", Res.drawable.flag_no),
+    OMR("Oman", Res.drawable.flag_om),
+    PKR("Pakistan", Res.drawable.flag_pk),
+    PAB("Panama", Res.drawable.flag_pa),
+    PGK("Papua New Guinea", Res.drawable.flag_pg),
+    PYG("Paraguay", Res.drawable.flag_py),
+    PEN("Peru", Res.drawable.flag_pe),
+    PHP("Philippines", Res.drawable.flag_ph),
+    PLN("Poland", Res.drawable.flag_pl),
+    QAR("Qatar", Res.drawable.flag_qa),
+    RON("Romania", Res.drawable.flag_ro),
+    RUB("Russia", Res.drawable.flag_ru),
+    RWF("Rwanda", Res.drawable.flag_rw),
+    SHP("Saint Helena", Res.drawable.flag_sh),
+    WST("Samoa", Res.drawable.flag_ws),
+    SAR("Saudi Arabia", Res.drawable.flag_sa),
+    RSD("Serbia", Res.drawable.flag_rs),
+    SCR("Seychelles", Res.drawable.flag_sc),
+    SLL("Sierra Leone", Res.drawable.flag_sl),
+    SGD("Singapore", Res.drawable.flag_sg),
+    SBD("Solomon Islands", Res.drawable.flag_sb),
+    SOS("Somalia", Res.drawable.flag_so),
+    ZAR("South Africa", Res.drawable.flag_za),
+    SSP("South Sudan", Res.drawable.flag_ss),
+    LKR("Sri Lanka", Res.drawable.flag_lk),
+    SDG("Sudan", Res.drawable.flag_sd),
+    SRD("Suriname", Res.drawable.flag_sr),
+    SZL("Eswatini", Res.drawable.flag_sz),
+    SEK("Sweden", Res.drawable.flag_se),
+    CHF("Switzerland", Res.drawable.flag_ch),
+    SYP("Syria", Res.drawable.flag_sy),
+    TWD("Taiwan", Res.drawable.flag_tw),
+    TJS("Tajikistan", Res.drawable.flag_tj),
+    TZS("Tanzania", Res.drawable.flag_tz),
+    THB("Thailand", Res.drawable.flag_th),
+    TOP("Tonga", Res.drawable.flag_to),
+    TTD("Trinidad and Tobago", Res.drawable.flag_tt),
+    TND("Tunisia", Res.drawable.flag_tn),
+    TRY("Turkey", Res.drawable.flag_tr),
+    TMT("Turkmenistan", Res.drawable.flag_tm),
+    UGX("Uganda", Res.drawable.flag_ug),
+    UAH("Ukraine", Res.drawable.flag_ua),
+    AED("United Arab Emirates", Res.drawable.flag_ae),
+    GBP("United Kingdom", Res.drawable.flag_gb),
+    USD("United States", Res.drawable.flag_us),
+    UYU("Uruguay", Res.drawable.flag_uy),
+    UZS("Uzbekistan", Res.drawable.flag_uz),
+    VUV("Vanuatu", Res.drawable.flag_vu),
+    VES("Venezuela", Res.drawable.flag_ve),
+    VND("Vietnam", Res.drawable.flag_vn),
+    YER("Yemen", Res.drawable.flag_ye),
+    ZMW("Zambia", Res.drawable.flag_zm),
+    ZWL("Zimbabwe", Res.drawable.flag_zw),
+}

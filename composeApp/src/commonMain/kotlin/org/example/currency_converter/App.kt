@@ -13,5 +13,4 @@ import org.example.currency_converter.dependencyInjection.initKoin
 fun App() {
     initKoin()
     MaterialTheme { Navigator(HomePage()) }
-    TODO("filter fetched data")
 }
