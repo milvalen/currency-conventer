@@ -36,9 +36,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
         }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-        }
+        iosMain.dependencies { implementation(libs.ktor.client.darwin) }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)

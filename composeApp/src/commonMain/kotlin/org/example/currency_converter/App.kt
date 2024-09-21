@@ -6,7 +6,12 @@ import cafe.adriel.voyager.navigator.Navigator
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import org.example.currency_converter.presentation.screen.HomePage
+import org.example.currency_converter.dependencyInjection.initKoin
 
 @Composable
 @Preview
-fun App() = MaterialTheme { Navigator(HomePage()) }
+fun App() {
+    initKoin()
+    MaterialTheme { Navigator(HomePage()) }
+    TODO("filter fetched data")
+}

@@ -11,11 +11,14 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 import org.example.currency_converter.domain.CurrencyConverterApiService
+import org.example.currency_converter.domain.SharedPrefsRepo
 import org.example.currency_converter.domain.model.ApiResponse
 import org.example.currency_converter.domain.model.CurrencyObject
 import org.example.currency_converter.domain.model.RequestCondition
 
-class CurrencyConverterApiServiceImpl: CurrencyConverterApiService {
+class CurrencyConverterApiServiceImpl(
+    private val prefs: SharedPrefsRepo
+): CurrencyConverterApiService {
     companion object {
         const val API_KEY = ""
         const val API_ENDPOINT = ""
@@ -40,11 +43,10 @@ class CurrencyConverterApiServiceImpl: CurrencyConverterApiService {
             val apiResponse = httpClient.get(API_ENDPOINT)
 
             if (apiResponse.status.value == 200) {
-                println("API Response=${apiResponse.body<String>()}")
-
-                RequestCondition.SuccessCondition(
-                    Json.decodeFromString<ApiResponse>(apiResponse.body()).data.values.toList()
-                )
+                Json.decodeFromString<ApiResponse>(apiResponse.body()).let {
+                    prefs.storeLastUpdatedTime(it.meta.last_updated_at)
+                    RequestCondition.SuccessCondition(it.data.values.toList())
+                }
             } else {
                 RequestCondition.ErrorCondition("HTTP Error: ${apiResponse.status}")
             }
