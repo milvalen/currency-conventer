@@ -21,8 +21,8 @@ class CurrencyConverterApiServiceImpl(
     private val prefs: SharedPrefsRepo
 ): CurrencyConverterApiService {
     companion object {
-        const val API_KEY = ""
-        const val API_ENDPOINT = ""
+        const val API_KEY = "cur_live_M1DKPGLUqPgR1UstWDpVeKypv4BJsA35MaZOZ5UV"
+        const val API_ENDPOINT = "https://api.currencyapi.com/v3/latest"
     }
 
     private val httpClient = HttpClient {
@@ -46,6 +46,7 @@ class CurrencyConverterApiServiceImpl(
             if (apiResponse.status.value == 200)
                 Json.decodeFromString<ApiResponse>(apiResponse.body()).let {
                     prefs.storeLastUpdatedTime(it.meta.last_updated_at)
+                    println("API Response=$it")
 
                     RequestCondition.SuccessCondition(
                         it.data.values.filter {

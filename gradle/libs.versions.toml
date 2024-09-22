@@ -22,6 +22,7 @@ coroutines = "1.8.0"
 statelyCommon = "2.0.5"
 ktor = "2.3.9"
 date-time = "0.6.0"
+uiAndroid = "1.7.2"
 
 
 [libraries]
@@ -53,6 +54,7 @@ ktor-client-core = { module =  "io.ktor:ktor-client-core", version.ref = "ktor" 
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "date-time" }
+androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 
 
 [plugins]

@@ -8,6 +8,7 @@ import org.example.currency_converter.data.local.SharedPrefsImpl
 import org.example.currency_converter.data.remote.thirdPartyAPI.CurrencyConverterApiServiceImpl
 import org.example.currency_converter.domain.CurrencyConverterApiService
 import org.example.currency_converter.domain.SharedPrefsRepo
+import org.example.currency_converter.presentation.screen.HomePageViewModel
 
 fun initKoin() {
     startKoin {
@@ -15,6 +16,7 @@ fun initKoin() {
             single { Settings() }
             single<SharedPrefsRepo> { SharedPrefsImpl(get()) }
             single<CurrencyConverterApiService> { CurrencyConverterApiServiceImpl(get()) }
+            factory { HomePageViewModel(get(), get()) }
         })
     }
 }
