@@ -15,15 +15,17 @@ class SharedPrefsImpl(private val settings: Settings): SharedPrefsRepo {
     private val proceededSettings = (settings as ObservableSettings).toFlowSettings()
 
     override suspend fun storeLastUpdatedTime(lastUpdated: String) {
-        proceededSettings.putLong(TIMESTAMP_KEY, 0L)
+        proceededSettings.putLong(TIMESTAMP_KEY, Instant.parse(lastUpdated).toEpochMilliseconds())
     }
 
     override suspend fun isFreshFetched(currentTimestamp: Long): Boolean {
-        val storedTimestamp = proceededSettings.getLong(TIMESTAMP_KEY, 0L)
-
-        return if (storedTimestamp != 0L) TimeZone.currentSystemDefault().let {
-            Instant.fromEpochMilliseconds(currentTimestamp).toLocalDateTime(it).date.dayOfYear
-            - Instant.fromEpochMilliseconds(storedTimestamp).toLocalDateTime(it).date.dayOfYear < 1
-        } else false
+        proceededSettings.getLong(TIMESTAMP_KEY, 0L).let {
+            return it != 0L && Instant
+                .fromEpochMilliseconds(currentTimestamp)
+                .toLocalDateTime(TimeZone.currentSystemDefault()).date.dayOfYear -
+                    Instant
+                        .fromEpochMilliseconds(it)
+                        .toLocalDateTime(TimeZone.currentSystemDefault()).date.dayOfYear < 1
+        }
     }
 }

@@ -100,4 +100,3 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
-

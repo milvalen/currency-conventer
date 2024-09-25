@@ -21,8 +21,8 @@ class CurrencyConverterApiServiceImpl(
     private val prefs: SharedPrefsRepo
 ): CurrencyConverterApiService {
     companion object {
-        const val API_KEY = "cur_live_M1DKPGLUqPgR1UstWDpVeKypv4BJsA35MaZOZ5UV"
-        const val API_ENDPOINT = "https://api.currencyapi.com/v3/latest"
+        const val API_KEY = ""
+        const val API_ENDPOINT = ""
     }
 
     private val httpClient = HttpClient {
@@ -38,7 +38,7 @@ class CurrencyConverterApiServiceImpl(
         install(DefaultRequest) { headers { append("apikey", API_KEY) } }
     }
 
-    override suspend fun retreiveLatestCurrencyConverterRates()
+    override suspend fun retrieveLatestCurrencyConverterRates()
     : RequestCondition<List<CurrencyObject>> {
         return try {
             val apiResponse = httpClient.get(API_ENDPOINT)
@@ -57,7 +57,8 @@ class CurrencyConverterApiServiceImpl(
                             }.contains(currency.code)
                         }
                     )
-            } else RequestCondition.ErrorCondition("HTTP Error: ${apiResponse.status}")
+                }
+            else RequestCondition.ErrorCondition("HTTP Error: ${apiResponse.status}")
         } catch (error: Exception) { RequestCondition.ErrorCondition("${error.message}") }
     }
 }

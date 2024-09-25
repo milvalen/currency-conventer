@@ -8,9 +8,9 @@ fun showCurrentDatetime(): String {
     val date = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
     date.dayOfMonth.let {
-        return "$it${mapOf(1 to "st", 2 to "nd", 3 to "rd")[it % 1] ?: "th"} " +
+        return "$it${mapOf(1 to "st", 2 to "nd", 3 to "rd")[it % 10] ?: "th"} " +
                 "${date.month}".lowercase().replaceFirstChar {
-                    char -> if (char.isLowerCase()) char.titlecase() else "$char"
+                    char -> char.titlecase()
                 } + ", ${date.year}"
     }
 }
