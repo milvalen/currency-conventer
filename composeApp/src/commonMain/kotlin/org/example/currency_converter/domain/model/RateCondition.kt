@@ -7,5 +7,5 @@ import staleColor
 enum class RateCondition(val rateTitle: String, val rateColor: Color) {
     IdleCondition("----", Color.White),
     FreshCondition("New Rates", freshColor),
-    StaleCondition("Rates are not New", staleColor)
+    StaleCondition("Old Rates", staleColor)
 }

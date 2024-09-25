@@ -1,6 +1,9 @@
 package org.example.currency_converter.domain.model
 
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
 import kotlinx.serialization.Serializable
+import org.mongodb.kbson.ObjectId
 
 @Serializable
 data class ApiResponse(val meta: ApiMetaData, val data: Map<String, CurrencyObject>)
@@ -9,4 +12,9 @@ data class ApiResponse(val meta: ApiMetaData, val data: Map<String, CurrencyObje
 data class ApiMetaData(val last_updated_at: String)
 
 @Serializable
-data class CurrencyObject(val code: String, val value: Double)
+open class CurrencyObject: RealmObject {
+    @PrimaryKey
+    var docID = ObjectId()
+    var code = ""
+    var value = 0.0
+}
