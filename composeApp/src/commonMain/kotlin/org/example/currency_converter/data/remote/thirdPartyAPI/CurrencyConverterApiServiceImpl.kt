@@ -46,7 +46,7 @@ class CurrencyConverterApiServiceImpl(
             if (apiResponse.status.value == 200)
                 Json.decodeFromString<ApiResponse>(apiResponse.body()).let {
                     prefs.storeLastUpdatedTime(it.meta.last_updated_at)
-                    println("API Response = $it")
+                    println("API Response: $it")
 
                     RequestCondition.SuccessCondition(
                         it.data.values.filter {
