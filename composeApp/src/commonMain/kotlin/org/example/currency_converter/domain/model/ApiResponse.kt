@@ -5,8 +5,6 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 import kotlinx.serialization.Serializable
 import org.mongodb.kbson.ObjectId
 
-// TODO: display default currencies
-
 @Serializable
 data class ApiResponse(val meta: ApiMetaData, val data: Map<String, CurrencyObject>)
 

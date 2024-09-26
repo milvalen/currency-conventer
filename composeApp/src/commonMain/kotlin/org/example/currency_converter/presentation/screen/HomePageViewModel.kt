@@ -1,10 +1,13 @@
 package org.example.currency_converter.presentation.screen
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -25,18 +28,30 @@ class HomePageViewModel(
 ): ScreenModel {
     private var _rateRefreshStatus = mutableStateOf(RateCondition.IdleCondition)
     val rateRefreshStatus: State<RateCondition> = _rateRefreshStatus
-    private var _currencyFrom = mutableStateOf(RequestCondition.IdleCondition)
-    val sourceCurrency: State<RequestCondition<CurrencyObject>> = _currencyFrom
-    private var _currencyTo = mutableStateOf(RequestCondition.IdleCondition)
-    val targetCurrency: State<RequestCondition<CurrencyObject>> = _currencyTo
+
+    private var _sourceCurrency: MutableState<RequestCondition<CurrencyObject>> =
+        mutableStateOf(RequestCondition.IdleCondition)
+
+    val sourceCurrency: State<RequestCondition<CurrencyObject>> = _sourceCurrency
+
+    private var _targetCurrency: MutableState<RequestCondition<CurrencyObject>> =
+        mutableStateOf(RequestCondition.IdleCondition)
+
+    val targetCurrency: State<RequestCondition<CurrencyObject>> = _targetCurrency
     private var _allCurrencies = mutableStateListOf<CurrencyObject>()
     val allCurrencies: List<CurrencyObject> = _allCurrencies
 
-    init { screenModelScope.launch { readNewRates() } }
+    init {
+        screenModelScope.launch {
+            readNewRates()
+            readSourceCurrency()
+            readTargetCurrency()
+        }
+    }
 
     private suspend fun readNewRates() {
         try {
-            val localStorage = mongoDbRepo.retrieveCurrencyAmountData().first()
+            val localStorage = mongoDbRepo.readCurrencyAmountData().first()
 
             if (localStorage.isSuccess()) {
                 localStorage.getSuccessInfo().let {
@@ -93,5 +108,31 @@ class HomePageViewModel(
 
     fun passEvent(event: HomePageUiEvent) {
         if (event is HomePageUiEvent.RefreshRatesEvent) screenModelScope.launch { readNewRates() }
+    }
+
+    private fun readSourceCurrency() {
+        screenModelScope.launch(Dispatchers.Main) {
+            prefs.readSourceCurrencyKey().collectLatest {
+                currencyKey ->
+                _allCurrencies.find { currency -> currency.code == currencyKey.name }.let {
+                    _sourceCurrency.value =
+                        if (it != null) RequestCondition.SuccessCondition(it)
+                        else RequestCondition.ErrorCondition("Selected Currency not Found")
+                }
+            }
+        }
+    }
+
+    private fun readTargetCurrency() {
+        screenModelScope.launch(Dispatchers.Main) {
+            prefs.readTargetCurrencyKey().collectLatest {
+                currencyKey ->
+                _allCurrencies.find { currency -> currency.code == currencyKey.name }.let {
+                    _targetCurrency.value =
+                        if (it != null) RequestCondition.SuccessCondition(it)
+                        else RequestCondition.ErrorCondition("Selected Currency not Found")
+                }
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ class MongoDbImpl: MongoDbRepo {
     private var realm: Realm? = null
     init { setRealm() }
 
-    override fun retrieveCurrencyAmountData(): Flow<RequestCondition<List<CurrencyObject>>> {
+    override fun readCurrencyAmountData(): Flow<RequestCondition<List<CurrencyObject>>> {
         return realm?.query<CurrencyObject>()?.asFlow()?.map {
             result -> RequestCondition.SuccessCondition(result.list)
         } ?: flow { RequestCondition.ErrorCondition("Realm Setting is not Successful") }
