@@ -15,24 +15,28 @@ import cafe.adriel.voyager.koin.getScreenModel
 import org.example.currency_converter.presentation.component.HomePageHeader
 import surfaceColor
 
+// TODO: switch animation
+
 class HomePage: Screen {
     @Composable
     override fun Content() {
-        val viewModel = getScreenModel<HomePageViewModel>()
-        val rateCondition by viewModel.rateRefreshStatus
-        val currencyFrom by viewModel.sourceCurrency
-        val currencyTo by viewModel.targetCurrency
-        var amountDigits by rememberSaveable { mutableStateOf(0.0) }
+        getScreenModel<HomePageViewModel>().let {
+            val rateCondition by it.rateRefreshStatus
+            val currencyFrom by it.sourceCurrency
+            val currencyTo by it.targetCurrency
 
-        Column(Modifier.fillMaxSize().background(surfaceColor)) {
-            HomePageHeader(
-                rateCondition,
-                currencyFrom,
-                currencyTo,
-                amountDigits,
-                { amountDigits = it },
-                { viewModel.passEvent(HomePageUiEvent.RefreshRatesEvent) }
-            ) {}
+            var amountDigits by rememberSaveable { mutableStateOf(0.0) }
+
+            Column(Modifier.fillMaxSize().background(surfaceColor)) {
+                HomePageHeader(
+                    rateCondition,
+                    currencyFrom,
+                    currencyTo,
+                    amountDigits,
+                    { number -> amountDigits = number },
+                    { it.passEvent(HomePageUiEvent.RefreshRatesEvent) }
+                ) { it.passEvent(HomePageUiEvent.CurrenciesSwitch) }
+            }
         }
     }
 }

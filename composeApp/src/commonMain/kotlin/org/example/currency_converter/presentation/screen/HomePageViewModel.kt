@@ -19,14 +19,19 @@ import org.example.currency_converter.domain.model.CurrencyObject
 import org.example.currency_converter.domain.model.RateCondition
 import org.example.currency_converter.domain.model.RequestCondition
 
-sealed class HomePageUiEvent { data object RefreshRatesEvent: HomePageUiEvent() }
+sealed class HomePageUiEvent {
+    data object RefreshRatesEvent: HomePageUiEvent()
+    data object CurrenciesSwitch: HomePageUiEvent()
+}
 
 class HomePageViewModel(
     private val prefs: SharedPrefsRepo,
     private val apiService: CurrencyConverterApiService,
     private val mongoDbRepo: MongoDbRepo
 ): ScreenModel {
-    private var _rateRefreshStatus = mutableStateOf(RateCondition.IdleCondition)
+    private var _rateRefreshStatus: MutableState<RateCondition> =
+        mutableStateOf(RateCondition.IdleCondition)
+
     val rateRefreshStatus: State<RateCondition> = _rateRefreshStatus
 
     private var _sourceCurrency: MutableState<RequestCondition<CurrencyObject>> =
@@ -107,7 +112,10 @@ class HomePageViewModel(
     }
 
     fun passEvent(event: HomePageUiEvent) {
-        if (event is HomePageUiEvent.RefreshRatesEvent) screenModelScope.launch { readNewRates() }
+        when(event) {
+            is HomePageUiEvent.RefreshRatesEvent -> screenModelScope.launch { readNewRates() }
+            is HomePageUiEvent.CurrenciesSwitch -> switchCurrencies()
+        }
     }
 
     private fun readSourceCurrency() {
@@ -133,6 +141,13 @@ class HomePageViewModel(
                         else RequestCondition.ErrorCondition("Selected Currency not Found")
                 }
             }
+        }
+    }
+
+    private fun switchCurrencies() {
+        listOf(_sourceCurrency.value, _targetCurrency.value).let {
+            _sourceCurrency.value = it[1]
+            _targetCurrency.value = it[0]
         }
     }
 }
