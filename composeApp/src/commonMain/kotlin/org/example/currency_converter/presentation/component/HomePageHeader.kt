@@ -1,6 +1,8 @@
 package org.example.currency_converter.presentation.component
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,10 +25,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -166,17 +173,31 @@ fun RowScope.ViewCurrency(
     }
 }
 
+// TODO: currency view animation
+
 @Composable
 fun CurrencyInputs(
     source: RequestCondition<CurrencyObject>,
     target: RequestCondition<CurrencyObject>,
     onSwitchClick: () -> Unit,
 ) {
+    var isAnimationInitialized by remember { mutableStateOf(false) }
+
+    val rotationAnimation by animateFloatAsState(
+        if (isAnimationInitialized) 180f else 0f, tween(500)
+    )
+
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        ViewCurrency("from Currency", source, { if (source.isSuccess()) {} })
+        ViewCurrency("from Currency", source) { if (source.isSuccess()) {} }
         Spacer(Modifier.height(14.dp))
 
-        IconButton(onSwitchClick, Modifier.padding(top = 24.dp)) {
+        IconButton(
+            {
+                isAnimationInitialized = !isAnimationInitialized
+                onSwitchClick()
+            },
+            Modifier.padding(top = 24.dp).graphicsLayer { rotationY = rotationAnimation }
+        ) {
             Icon(
                 painterResource(Res.drawable.switch_currency),
                 "Switch Currency Icon",
