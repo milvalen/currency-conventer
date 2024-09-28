@@ -50,6 +50,7 @@ import currencyconverter.composeapp.generated.resources.switch_currency
 import org.example.currency_converter.domain.model.CurrencyKey
 import org.example.currency_converter.domain.model.CurrencyObject
 import org.example.currency_converter.domain.model.RequestCondition
+import org.example.currency_converter.domain.model.ShowResult
 import org.example.currency_converter.utility.showCurrentDatetime
 import staleColor
 
@@ -125,7 +126,7 @@ fun RatesCondition(status: RateCondition, onRatesRefresh: () -> Unit) {
 }
 
 @Composable
-fun RowScope.ViewCurrency(
+fun RowScope.CurrencyView(
     titleHolder: String,
     currencyName: RequestCondition<CurrencyObject>,
     onClick: () -> Unit
@@ -150,30 +151,31 @@ fun RowScope.ViewCurrency(
             Arrangement.Center,
             Alignment.CenterVertically
         ) {
-            if (currencyName.isSuccess()) {
-                CurrencyKey.valueOf(currencyName.getSuccessInfo().code).let {
-                    Icon(
-                        painterResource(it.countryFlag),
-                        "Country Flag",
-                        Modifier.size(24.dp),
-                        Color.Unspecified
-                    )
+            currencyName.ShowResult(
+                onSuccess = {
+                    data ->
+                    CurrencyKey.valueOf(data.code).let {
+                        Icon(
+                            painterResource(it.countryFlag),
+                            "Country Flag",
+                            Modifier.size(24.dp),
+                            Color.Unspecified
+                        )
 
-                    Spacer(Modifier.width(8.dp))
+                        Spacer(Modifier.width(8.dp))
 
-                    Text(
-                        it.name,
-                        color = Color.White,
-                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                        fontWeight = FontWeight.Bold
-                    )
+                        Text(
+                            it.name,
+                            color = Color.White,
+                            fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
-            }
+            )
         }
     }
 }
-
-// TODO: currency view animation
 
 @Composable
 fun CurrencyInputs(
@@ -184,11 +186,12 @@ fun CurrencyInputs(
     var isAnimationInitialized by remember { mutableStateOf(false) }
 
     val rotationAnimation by animateFloatAsState(
-        if (isAnimationInitialized) 180f else 0f, tween(500)
+        if (isAnimationInitialized) 180f else 0f,
+        tween(500)
     )
 
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        ViewCurrency("from Currency", source) { if (source.isSuccess()) {} }
+        CurrencyView("from Currency", source) { if (source.isSuccess()) {} }
         Spacer(Modifier.height(14.dp))
 
         IconButton(
@@ -206,7 +209,7 @@ fun CurrencyInputs(
         }
 
         Spacer(Modifier.height(16.dp))
-        ViewCurrency("to", target, { if (source.isSuccess()) {} })
+        CurrencyView("to", target) { if (source.isSuccess()) {} }
     }
 }
 
