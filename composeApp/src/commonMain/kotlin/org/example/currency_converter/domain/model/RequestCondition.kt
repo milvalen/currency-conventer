@@ -14,22 +14,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import io.ktor.util.reflect.typeInfo
-import io.realm.kotlin.internal.platform.returnType
-import kotlin.reflect.typeOf
 
 sealed class RequestCondition<out T> {
-    data object IdleCondition: RequestCondition<Nothing>()
     data object LoadingCondition: RequestCondition<Nothing>()
+    data object IdleCondition: RequestCondition<Nothing>()
 
-    data class SuccessCondition<out T>(val data: T): RequestCondition<T>()
     data class ErrorCondition(val message: String): RequestCondition<Nothing>()
+    data class SuccessCondition<out T>(val data: T): RequestCondition<T>()
 
-    fun isLoading() = this is LoadingCondition
-    fun isError() = this is ErrorCondition
-    fun isSuccess() = this is SuccessCondition
-    fun getSuccessInfo() = (this as SuccessCondition).data
     fun getErrorMessageInfo() = (this as ErrorCondition).message
+    fun getSuccessInfo() = (this as SuccessCondition).data
+    fun isLoading() = this is LoadingCondition
+    fun isSuccess() = this is SuccessCondition
+    fun isError() = this is ErrorCondition
 }
 
 @Composable
